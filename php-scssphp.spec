@@ -2,22 +2,18 @@
 # Conditional build:
 %bcond_with	tests		# build without tests
 
-%define		github_commit    6fdfe19d2b13a3f12ba0792227f0718809ce4e4d
-
 %define		pkgname	scssphp
 %define		php_min_version 5.4.0
 %include	/usr/lib/rpm/macros.php
 Summary:	A compiler for SCSS written in PHP
 Name:		php-%{pkgname}
-Version:	0.6.6
+Version:	0.4.0
 Release:	1
 License:	MIT
 Group:		Development/Libraries
 URL:		http://leafo.github.io/scssphp
-# GitHub export does not include tests.
-# Run php-scssphp-get-source.sh to create full source.
-Source0:	http://pkgs.fedoraproject.org/repo/pkgs/php-scssphp/php-scssphp-%{version}-%{github_commit}.tar.gz/97e6ff969551eece3a96b5cb0849ad59/php-scssphp-%{version}-%{github_commit}.tar.gz
-# Source0-md5:	97e6ff969551eece3a96b5cb0849ad59
+Source0:	https://github.com/leafo/scssphp/archive/v%{version}/%{pkgname}-%{version}.tar.gz
+# Source0-md5:	7f18d57fdfa336fc583d34899779ab1c
 Source1:	autoload.php
 BuildRequires:	/usr/bin/php
 %if %{with tests}
@@ -34,9 +30,11 @@ Requires:	php(ctype)
 Requires:	php(date)
 Requires:	php(mbstring)
 Requires:	php(pcre)
-Requires:	php-cli
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# exclude PEAR deps
+%define		_noautoreq_pear	.*
 
 %description
 SCSS <http://sass-lang.com/> is a CSS preprocessor that adds many
@@ -51,7 +49,7 @@ scssphp implements SCSS. It does not implement the SASS syntax, only
 the SCSS syntax.
 
 %prep
-%setup -qn %{pkgname}-%{github_commit}
+%setup -qn %{pkgname}-%{version}
 
 : Bin
 sed "/scss.inc.php/s#.*#require_once '%{php_data_dir}/Leafo/ScssPhp/autoload.php';#" \
