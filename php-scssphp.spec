@@ -3,17 +3,17 @@
 %bcond_with	tests		# build without tests
 
 %define		pkgname	scssphp
-%define		php_min_version 5.4.0
+%define		php_min_version 5.3.0
 %include	/usr/lib/rpm/macros.php
 Summary:	A compiler for SCSS written in PHP
 Name:		php-%{pkgname}
-Version:	0.4.0
+Version:	0.3.3
 Release:	1
 License:	MIT
 Group:		Development/Libraries
 URL:		http://leafo.github.io/scssphp
 Source0:	https://github.com/leafo/scssphp/archive/v%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	7f18d57fdfa336fc583d34899779ab1c
+# Source0-md5:	7c7ef86a45219f01185c92dea1c8f320
 Source1:	autoload.php
 BuildRequires:	/usr/bin/php
 %if %{with tests}
