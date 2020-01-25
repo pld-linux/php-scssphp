@@ -6,7 +6,6 @@
 
 %define		pkgname	scssphp
 %define		php_min_version 5.4.0
-%include	/usr/lib/rpm/macros.php
 Summary:	A compiler for SCSS written in PHP
 Name:		php-%{pkgname}
 Version:	0.6.6
